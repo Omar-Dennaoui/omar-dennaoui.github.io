@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-palette="ink">
+<html lang="en" data-palette="cedar">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,16 +90,14 @@
   .year { font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.1em; color:var(--muted); margin:22px 0 10px; }
   .year:first-child { margin-top:0; }
 
+  .group { font-family:Fraunces, serif; font-weight:600; font-size:1.15rem; margin:30px 0 4px; }
+  .group:first-child { margin-top:0; }
+  .group + .year { margin-top:12px; }
   details.older { margin-top:22px; border:1px dashed var(--rule); border-radius:10px; padding:10px 16px; }
   details.older > summary { cursor:pointer; font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--accent); }
   details.older[open] > summary { margin-bottom:14px; }
 
   footer { padding:28px 0 56px; font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted); }
-
-  /* ---------- palette picker: PREVIEW ONLY, delete this block + the .picker div when done ---------- */
-  .picker { position:fixed; right:16px; bottom:16px; background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:10px 12px; display:flex; gap:8px; align-items:center; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--muted); box-shadow:0 8px 24px -12px rgba(0,0,0,.3); z-index:10; }
-  .picker button { width:24px; height:24px; border-radius:50%; border:2px solid var(--card); outline:1px solid var(--rule); cursor:pointer; padding:0; }
-  .picker button[aria-pressed="true"] { outline:2px solid var(--ink); }
 
   @media (max-width:780px) {
     .hero { grid-template-columns:1fr; gap:48px; padding-top:32px; }
@@ -114,7 +112,7 @@
 
   <header class="hero">
     <div class="portrait">
-      <img src="OmarDennaoui.jpeg" alt="Photo of Omar Dennaoui"
+      <img src="OmarDennaoui.jpg" alt="Photo of Omar Dennaoui"
            onerror="this.outerHTML='<div class=&quot;ph&quot;>OD</div>'">
       <div class="hexbadge">
         <!-- A triangulated hexagon: the picture behind 2-Segal conditions -->
@@ -211,8 +209,15 @@
 
   <!-- ===== Talks ===== -->
   <details class="sec" id="talks">
-    <summary><h2>Talks<span class="count">7</span></h2><span class="plus">+</span></summary>
+    <summary><h2>Talks<span class="count">11</span></h2><span class="plus">+</span></summary>
     <div class="body">
+
+      <div class="group">Invited</div>
+      <div class="year">2026</div>
+      <div class="entry">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2
+        <div class="meta">Topology Seminar, University of Virginia · October 2026</div></div>
+
+      <div class="group">Contributed</div>
       <div class="year">2026</div>
       <div class="entry"><a href="Higher-Segal-Conditions-RFGRS.pdf">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2</a>
         <div class="meta">Representations of Finite Groups and Related Structures, UC Santa Cruz · August 2026</div></div>
@@ -220,32 +225,73 @@
         <div class="meta">International Category Theory Conference (CT26), Johns Hopkins University · July 2026</div></div>
       <div class="entry"><a href="Higher-Segal-Conditions-SRAC26.pdf">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2</a>
         <div class="meta">Southern Regional Algebra Conference, Southeastern Louisiana University · March 2026</div></div>
-
       <div class="year">2025</div>
       <div class="entry"><a href="Contractibility_SRAC25.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
         <div class="meta">Southern Regional Algebra Conference &amp; Lloyd Roeling UL Lafayette Mathematics Conference · April 2025</div></div>
       <div class="entry"><a href="Contractibility.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
         <div class="meta">South Central Topology Conference IV, Texas A&amp;M University · March 2025</div></div>
-
       <details class="older">
-        <summary>Older talks (2023–2024)</summary>
+        <summary>Older contributed talks (2023–2024)</summary>
         <div class="entry"><a href="DV-con.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
           <div class="meta">Zassenhaus Groups and Friends Conference, Texas State University · June 2024</div></div>
         <div class="entry"><a href="SCTCIII_beamer_SLIDES.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
           <div class="meta">South Central Topology Conference III, New Mexico State University · October 2023</div></div>
       </details>
+
+      <div class="group">Local &amp; expository</div>
+      <div class="year">2026</div>
+      <div class="entry">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2
+        <div class="meta">Algebra Seminar, University of Louisiana at Lafayette · October 2026</div></div>
+      <details class="older">
+        <summary>Older local talks (2022–2023)</summary>
+        <div class="entry">Contractibility of the orbit space of a saturated fusion system after Steinberg
+          <div class="meta">Algebra Seminar, University of Louisiana at Lafayette · November 2023</div></div>
+        <div class="entry">Limits and colimits, generators and relations of partial groups
+          <div class="meta">Algebra Seminar, University of Louisiana at Lafayette · March 2022</div></div>
+      </details>
     </div>
   </details>
+
+  <!-- ===== Positions (HIDDEN) =====
+       To show this section: delete the "HIDDEN" comment lines around it, and add
+       <a href="#positions">Positions</a> to the nav row near the top.
+
+  <details class="sec" id="positions">
+    <summary><h2>Positions</h2><span class="plus">+</span></summary>
+    <div class="body">
+      <p class="meta" style="margin-top:0">At the University of Louisiana at Lafayette:</p>
+      <div class="entry"><b>Dissertation Completion Fellow</b> <span class="meta">· Fall 2026 – Spring 2027</span></div>
+      <div class="entry"><b>Graduate Research Assistant</b>, with Philip Hackney <span class="meta">· January 2025 – May 2026</span></div>
+      <div class="entry"><b>Graduate Teaching Assistant</b> <span class="meta">· January 2021 – December 2024</span></div>
+    </div>
+  </details>
+
+  ===== end Positions ===== -->
 
   <!-- ===== Teaching ===== -->
   <details class="sec" id="teaching">
     <summary><h2>Teaching</h2><span class="plus">+</span></summary>
     <div class="body">
-      <p class="meta" style="margin-top:0">At the University of Louisiana at Lafayette:</p>
-      <div class="entry">Math 109/109S · Pre-Calculus Algebra <span class="meta">· Spring 2024</span></div>
-      <div class="entry">Math 105/105S · Applied College Algebra Fundamentals <span class="meta">· Fall 2023, Fall 2024</span></div>
-      <div class="entry">Math 105 · Applied College Algebra <span class="meta">· Spring 2023</span></div>
-      <div class="entry">Math 103/104 · Applied College Algebra Fundamentals <span class="meta">· Fall 2022</span></div>
+
+      <!-- ===== Office hours (HIDDEN) =====
+           To show this block: delete the "HIDDEN" comment lines around it.
+
+      <div class="group">Current course &amp; office hours</div>
+      <div class="entry"><b>MATH ___: Course title</b> <span class="meta">· Semester Year</span>
+        <div class="meta">Lectures: Days, time, room</div>
+        <div class="meta">Office hours: Days, time · Maxim Doucet Hall 315 (or by appointment)</div>
+        <div class="links"><a href="syllabus.pdf">syllabus</a> · <a href="https://moodle.louisiana.edu">Moodle</a></div>
+      </div>
+      <div class="group">Past courses</div>
+
+      ===== end Office hours ===== -->
+
+      <p class="meta" style="margin-top:0">Courses taught at the University of Louisiana at Lafayette:</p>
+      <div class="entry">MTHS 105/105S · Applied College Algebra Fundamentals <span class="meta">· Fall 2024</span></div>
+      <div class="entry">MTHS 109/109S · Pre-Calculus Algebra <span class="meta">· Spring 2024</span></div>
+      <div class="entry">MTHS 105/105S · Applied College Algebra Fundamentals <span class="meta">· Fall 2023</span></div>
+      <div class="entry">MATH 105 · Applied College Algebra <span class="meta">· Spring 2023</span></div>
+      <div class="entry">MATH 103/104 · Applied College Algebra Fundamentals <span class="meta">· Fall 2022</span></div>
     </div>
   </details>
 
@@ -262,16 +308,6 @@
   <footer>Omar Dennaoui · Department of Mathematics, University of Louisiana at Lafayette</footer>
 </div>
 
-<!-- PREVIEW ONLY: palette picker. Delete this div and its script, and keep whichever data-palette you like on <html>. -->
-<div class="picker" role="group" aria-label="Color palette">
-  <span>palette</span>
-  <button data-p="ink"     style="background:#1f3a68" title="Ink & ochre"></button>
-  <button data-p="oxblood" style="background:#7a1f2b" title="Oxblood & gold"></button>
-  <button data-p="slate"   style="background:#334e5c" title="Slate & coral"></button>
-  <button data-p="plum"    style="background:#5b2a6e" title="Plum & amber"></button>
-  <button data-p="cedar"   style="background:#2f6b45" title="Cedar & ochre"></button>
-</div>
-
 <script>
   // Jump links open the matching section, then scroll to it.
   document.querySelectorAll('.jump a').forEach(a => {
@@ -283,12 +319,6 @@
   // Open a section directly if the URL has a #hash (e.g. .../#talks).
   if (location.hash) { const d = document.querySelector(location.hash); if (d && d.tagName === 'DETAILS') d.open = true; }
 
-  // PREVIEW ONLY: palette picker
-  const root = document.documentElement, btns = document.querySelectorAll('.picker button');
-  function setP(p) { root.dataset.palette = p; btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.p === p)); try { localStorage.setItem('palette', p); } catch (e) {} }
-  btns.forEach(b => b.addEventListener('click', () => setP(b.dataset.p)));
-  let saved = null; try { saved = localStorage.getItem('palette'); } catch (e) {}
-  setP(saved || root.dataset.palette);
 </script>
 </body>
 </html>
