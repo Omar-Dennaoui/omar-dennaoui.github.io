@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-palette="ink">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,101 +8,152 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f6f5ef; --ink: #1f2a22; --muted: #66705f; --accent: #2f6b45; --accent-2: #c78a2c;
-    --soft: #e5ebe0; --rule: #d9dccf; --card: #fffefa;
-  }
+  /* ---------- neutrals ---------- */
+  :root { --bg:#f7f5f0; --ink:#1f2224; --muted:#696b65; --rule:#dcd9cf; --card:#fffefa; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #131813; --ink: #e2e8dc; --muted: #93a08c; --accent: #7cc490; --accent-2: #e2ad5a; --soft: #1f2b21; --rule: #2a352b; --card: #182019; }
+    :root { --bg:#141516; --ink:#e6e4de; --muted:#9a9890; --rule:#2d2e2f; --card:#1b1c1e; }
   }
+  /* ---------- palettes (accent, second accent, soft tint) ---------- */
+  [data-palette="cedar"]   { --accent:#2f6b45; --accent-2:#c78a2c; --soft:#e5ebe0; }
+  [data-palette="ink"]     { --accent:#1f3a68; --accent-2:#c9822b; --soft:#e3e8f1; }
+  [data-palette="oxblood"] { --accent:#7a1f2b; --accent-2:#b8862f; --soft:#f1e4e2; }
+  [data-palette="slate"]   { --accent:#334e5c; --accent-2:#d0603f; --soft:#e3eaec; }
+  [data-palette="plum"]    { --accent:#5b2a6e; --accent-2:#c48a2a; --soft:#ece3f0; }
+  @media (prefers-color-scheme: dark) {
+    [data-palette="cedar"]   { --accent:#7cc490; --accent-2:#e2ad5a; --soft:#1f2b21; }
+    [data-palette="ink"]     { --accent:#8fb0e8; --accent-2:#e3a85a; --soft:#1b2433; }
+    [data-palette="oxblood"] { --accent:#e3838f; --accent-2:#dcb15c; --soft:#2b1a1c; }
+    [data-palette="slate"]   { --accent:#9fc0cf; --accent-2:#ef8a6c; --soft:#1c262b; }
+    [data-palette="plum"]    { --accent:#c9a0dc; --accent-2:#e0b05e; --soft:#261c2b; }
+  }
+
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: Newsreader, Georgia, serif; font-size: 18.5px; line-height: 1.6; }
-  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
-  .mono-font { font-family: "IBM Plex Mono", monospace; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:Newsreader, Georgia, serif; font-size:18.5px; line-height:1.6; transition: background .3s; }
+  a { color:var(--accent); text-decoration-thickness:1px; text-underline-offset:3px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 20px; }
+  .mono { font-family:"IBM Plex Mono", monospace; }
 
-  .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; padding: 64px 0 48px; }
-  .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
-  .hero h1 { font-family: Fraunces, serif; font-weight: 600; font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; margin: 10px 0 16px; letter-spacing: -.02em; }
-  .hero p { font-size: 1.15rem; margin: 0 0 20px; max-width: 34em; }
-  .contact { display: flex; gap: 18px; flex-wrap: wrap; font-family: "IBM Plex Mono", monospace; font-size: 13.5px; align-items: center; }
-  .contact .pic, .contact .mono { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
-  .contact .mono { display: grid; place-items: center; background: var(--soft); color: var(--accent); font-weight: 500; }
-  .btn { border: 1px solid var(--accent); padding: 6px 12px; border-radius: 6px; text-decoration: none; }
+  /* ---------- hero ---------- */
+  .hero { display:grid; grid-template-columns:340px 1fr; gap:64px; align-items:center; padding:72px 0 56px; }
+  .portrait { position:relative; }
+  .portrait img, .portrait .ph { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:20px; display:block; box-shadow:0 18px 40px -20px rgba(0,0,0,.35); }
+  .portrait .ph { display:grid; place-items:center; background:var(--soft); color:var(--accent); font-family:Fraunces, serif; font-size:4rem; }
+  .portrait .hexbadge { position:absolute; right:-44px; bottom:-40px; width:150px; height:150px; border-radius:50%; background:var(--bg); padding:10px; }
 
-  .hex { width: 100%; max-width: 340px; justify-self: center; }
-  .hex .edge { stroke: var(--ink); stroke-width: 1.6; fill: none; }
-  .hex .diag { stroke: var(--accent); stroke-width: 1.6; fill: none; stroke-dasharray: 160; stroke-dashoffset: 160; animation: draw 1.4s ease forwards; }
-  .hex .diag:nth-of-type(2) { animation-delay: .35s; } .hex .diag:nth-of-type(3) { animation-delay: .7s; }
-  .hex .face { fill: var(--accent-2); opacity: 0; animation: fade .8s ease 1.5s forwards; }
-  .hex circle { fill: var(--bg); stroke: var(--ink); stroke-width: 1.6; }
-  .hex text { font-family: "IBM Plex Mono", monospace; font-size: 10px; fill: var(--muted); }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  @keyframes fade { to { opacity: .28; } }
+  .hex { width:100%; height:100%; }
+  .hex .edge { stroke:var(--ink); stroke-width:2.2; fill:none; }
+  .hex .diag { stroke:var(--accent); stroke-width:2.2; fill:none; stroke-dasharray:160; stroke-dashoffset:160; animation:draw 1.3s ease forwards; }
+  .hex .diag:nth-of-type(2) { animation-delay:.35s; } .hex .diag:nth-of-type(3) { animation-delay:.7s; }
+  .hex .face { fill:var(--accent-2); opacity:0; animation:fade .8s ease 1.5s forwards; }
+  .hex circle { fill:var(--bg); stroke:var(--ink); stroke-width:2.2; }
+  @keyframes draw { to { stroke-dashoffset:0; } }
+  @keyframes fade { to { opacity:.35; } }
 
-  section { border-top: 1px solid var(--rule); padding: 40px 0; display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
-  section > h2 { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 6px 0 0; }
+  .eyebrow { font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  .hero h1 { font-family:Fraunces, serif; font-weight:600; font-size:clamp(2.6rem, 6vw, 4rem); line-height:1.02; margin:10px 0 18px; letter-spacing:-.02em; }
+  .hero .blurb { font-size:1.18rem; margin:0 0 24px; max-width:33em; }
+  .contact { font-family:"IBM Plex Mono", monospace; font-size:13.5px; line-height:1.9; color:var(--muted); }
+  .contact a { color:var(--accent); }
+  .btn { display:inline-block; margin-top:14px; border:1px solid var(--accent); color:var(--accent); padding:7px 14px; border-radius:7px; text-decoration:none; font-family:"IBM Plex Mono", monospace; font-size:13.5px; }
+  .btn:hover { background:var(--accent); color:var(--bg); }
 
-  .threads { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 20px; }
-  .card svg { width: 100%; height: 130px; display: block; margin-bottom: 12px; }
-  .card svg line { stroke: var(--muted); stroke-width: 1.2; }
-  .card svg circle { fill: var(--accent); }
-  .card svg .hi { fill: var(--accent-2); }
-  .card h3 { font-family: Fraunces, serif; font-weight: 600; font-size: 1.2rem; margin: 0 0 6px; }
-  .card p { margin: 0 0 10px; font-size: 1rem; }
-  .card ul { margin: 0; padding-left: 1.1em; font-size: .95rem; }
+  /* ---------- section jump links ---------- */
+  .jump { display:flex; flex-wrap:wrap; gap:10px; padding:8px 0 36px; }
+  .jump a { font-family:"IBM Plex Mono", monospace; font-size:13.5px; text-decoration:none; color:var(--ink); border:1px solid var(--rule); background:var(--card); border-radius:999px; padding:7px 16px; }
+  .jump a:hover { border-color:var(--accent); color:var(--accent); }
 
-  .entry { margin-bottom: 18px; }
-  .entry .meta { color: var(--muted); font-size: .95rem; }
-  .entry .links { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
-  details { margin-bottom: 10px; }
-  summary { cursor: pointer; font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent); }
+  /* ---------- collapsible sections ---------- */
+  details.sec { border-top:1px solid var(--rule); }
+  details.sec:last-of-type { border-bottom:1px solid var(--rule); }
+  details.sec > summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:22px 0; }
+  details.sec > summary::-webkit-details-marker { display:none; }
+  details.sec > summary h2 { font-family:Fraunces, serif; font-weight:600; font-size:1.6rem; margin:0; }
+  details.sec > summary .count { font-family:"IBM Plex Mono", monospace; font-size:12.5px; color:var(--muted); margin-left:12px; font-weight:400; }
+  .plus { width:30px; height:30px; border-radius:50%; border:1px solid var(--rule); display:grid; place-items:center; color:var(--accent); font-family:"IBM Plex Mono", monospace; transition:transform .25s; flex:none; }
+  details[open] > summary .plus { transform:rotate(45deg); }
+  details.sec > summary:hover h2 { color:var(--accent); }
+  .body { padding:0 0 32px; }
 
-  footer { border-top: 1px solid var(--rule); padding: 28px 0 56px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
+  .threads { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:18px 0; }
+  .card { background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:20px; }
+  .card svg { width:100%; height:130px; display:block; margin-bottom:12px; }
+  .card svg line { stroke:var(--muted); stroke-width:1.2; }
+  .card svg circle { fill:var(--accent); }
+  .card svg .hi { fill:var(--accent-2); }
+  .card h3 { font-family:Fraunces, serif; font-weight:600; font-size:1.2rem; margin:0 0 6px; }
+  .card p { margin:0 0 10px; font-size:1rem; }
+  .card ul { margin:0; padding-left:1.1em; font-size:.95rem; }
 
-  @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; padding-top: 40px; }
-    .hex { max-width: 240px; order: -1; justify-self: start; }
-    section { grid-template-columns: 1fr; gap: 12px; }
-    .threads { grid-template-columns: 1fr; }
+  .entry { margin-bottom:18px; }
+  .entry .meta { color:var(--muted); font-size:.95rem; }
+  .entry .links { font-family:"IBM Plex Mono", monospace; font-size:12.5px; }
+  .year { font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.1em; color:var(--muted); margin:22px 0 10px; }
+  .year:first-child { margin-top:0; }
+
+  details.older { margin-top:22px; border:1px dashed var(--rule); border-radius:10px; padding:10px 16px; }
+  details.older > summary { cursor:pointer; font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--accent); }
+  details.older[open] > summary { margin-bottom:14px; }
+
+  footer { padding:28px 0 56px; font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted); }
+
+  /* ---------- palette picker: PREVIEW ONLY, delete this block + the .picker div when done ---------- */
+  .picker { position:fixed; right:16px; bottom:16px; background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:10px 12px; display:flex; gap:8px; align-items:center; font-family:"IBM Plex Mono", monospace; font-size:11.5px; color:var(--muted); box-shadow:0 8px 24px -12px rgba(0,0,0,.3); z-index:10; }
+  .picker button { width:24px; height:24px; border-radius:50%; border:2px solid var(--card); outline:1px solid var(--rule); cursor:pointer; padding:0; }
+  .picker button[aria-pressed="true"] { outline:2px solid var(--ink); }
+
+  @media (max-width:780px) {
+    .hero { grid-template-columns:1fr; gap:48px; padding-top:32px; }
+    .portrait { max-width:320px; }
+    .portrait .hexbadge { right:-16px; bottom:-30px; width:120px; height:120px; }
+    .threads { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="hero">
-    <div>
-      <div class="eyebrow">Mathematics · UL Lafayette</div>
-      <h1>Omar Dennaoui</h1>
-      <p>I study finite groups locally at a prime <i>p</i>, and the higher-categorical structures that encode them: partial groups, fusion systems, Segal conditions, and nerve theorems.</p>
-      <div class="contact">
-        <img class="pic" src="OmarDennaoui.jpg" alt="Omar Dennaoui"
-             onerror="this.outerHTML='<div class=&quot;mono&quot;>OD</div>'">
-        <a href="mailto:dennaoui@louisiana.edu">dennaoui@louisiana.edu</a>
-        <span>Maxim Doucet Hall 315</span>
-        <a class="btn" href="Omar_Dennaoui_CV.pdf">CV ↓</a>
+  <header class="hero">
+    <div class="portrait">
+      <img src="OmarDennaoui.jpg" alt="Photo of Omar Dennaoui"
+           onerror="this.outerHTML='<div class=&quot;ph&quot;>OD</div>'">
+      <div class="hexbadge">
+        <!-- A triangulated hexagon: the picture behind 2-Segal conditions -->
+        <svg class="hex" viewBox="10 20 200 170" aria-label="A triangulated hexagon">
+          <polygon class="face" points="30,105 150,35.7 150,174.3"/>
+          <polygon class="edge" points="190,105 150,174.3 70,174.3 30,105 70,35.7 150,35.7"/>
+          <line class="diag" x1="30" y1="105" x2="150" y2="35.7"/>
+          <line class="diag" x1="30" y1="105" x2="150" y2="174.3"/>
+          <line class="diag" x1="150" y1="35.7" x2="150" y2="174.3"/>
+          <circle cx="190" cy="105" r="7"/><circle cx="150" cy="174.3" r="7"/><circle cx="70" cy="174.3" r="7"/>
+          <circle cx="30" cy="105" r="7"/><circle cx="70" cy="35.7" r="7"/><circle cx="150" cy="35.7" r="7"/>
+        </svg>
       </div>
     </div>
 
-    <!-- A triangulated hexagon: the picture behind 2-Segal conditions -->
-    <svg class="hex" viewBox="0 0 220 210" aria-label="A triangulated hexagon">
-      <polygon class="face" points="30,105 150,35.7 150,174.3"/>
-      <polygon class="edge" points="190,105 150,174.3 70,174.3 30,105 70,35.7 150,35.7"/>
-      <line class="diag" x1="30" y1="105" x2="150" y2="35.7"/>
-      <line class="diag" x1="30" y1="105" x2="150" y2="174.3"/>
-      <line class="diag" x1="150" y1="35.7" x2="150" y2="174.3"/>
-      <circle cx="190" cy="105" r="5"/><circle cx="150" cy="174.3" r="5"/><circle cx="70" cy="174.3" r="5"/>
-      <circle cx="30" cy="105" r="5"/><circle cx="70" cy="35.7" r="5"/><circle cx="150" cy="35.7" r="5"/>
-      <text x="200" y="109">0</text><text x="156" y="194">1</text><text x="58" y="194">2</text>
-      <text x="10" y="109">3</text><text x="58" y="24">4</text><text x="156" y="24">5</text>
-    </svg>
-  </div>
-
-  <section>
-    <h2>Research</h2>
     <div>
+      <div class="eyebrow">Mathematics · University of Louisiana at Lafayette</div>
+      <h1>Omar Dennaoui</h1>
+      <p class="blurb">I study finite groups locally at a prime <i>p</i>, and the higher-categorical structures that encode them: partial groups, fusion systems, Segal conditions, and nerve theorems.</p>
+      <div class="contact">
+        <a href="mailto:dennaoui@louisiana.edu">dennaoui@louisiana.edu</a><br>
+        Maxim Doucet Hall 315 · Lafayette, LA 70504
+      </div>
+      <a class="btn" href="Omar_Dennaoui_CV.pdf">Curriculum vitae ↓</a>
+    </div>
+  </header>
+
+  <nav class="jump">
+    <a href="#research">Research</a>
+    <a href="#articles">Articles</a>
+    <a href="#talks">Talks</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#education">Education</a>
+  </nav>
+
+  <!-- ===== Research ===== -->
+  <details class="sec" id="research">
+    <summary><h2>Research</h2><span class="plus">+</span></summary>
+    <div class="body">
       <p style="margin-top:0">I'm a graduate student advised by <a href="https://userweb.ucs.louisiana.edu/~jxl7583/">Justin Lynd</a> and <a href="https://phck.net/">Philip Hackney</a>. My thesis has two connected threads:</p>
       <div class="threads">
         <div class="card">
@@ -127,7 +178,7 @@
           </ul>
         </div>
         <div class="card">
-          <!-- A corolla with cyclic symmetry: one operation, no distinguished output -->
+          <!-- A corolla with cyclic symmetry -->
           <svg viewBox="0 0 220 130" aria-label="A corolla with cyclic symmetry">
             <line x1="110" y1="65" x2="110" y2="12"/><line x1="110" y1="65" x2="160" y2="40"/>
             <line x1="110" y1="65" x2="160" y2="100"/><line x1="110" y1="65" x2="60" y2="100"/><line x1="110" y1="65" x2="60" y2="40"/>
@@ -144,57 +195,100 @@
       </div>
       <p>More broadly, I think about fusion systems and their homotopy theory and homological algebra, and modular representation theory.</p>
     </div>
-  </section>
+  </details>
 
-  <section>
-    <h2>Articles</h2>
-    <div>
+  <!-- ===== Articles ===== -->
+  <details class="sec" id="articles">
+    <summary><h2>Articles<span class="count">1</span></h2><span class="plus">+</span></summary>
+    <div class="body">
       <div class="entry">
         <div><b>Contractibility of the orbit space of a saturated fusion system after Steinberg</b></div>
         <div class="meta">with <a href="https://sites.google.com/view/jonathonvillareal/home">Jonathon Villareal</a> · <i>J. Algebra</i> 677 (2025), 267–277</div>
         <div class="links"><a href="https://doi.org/10.1016/j.jalgebra.2025.03.046">doi</a> · <a href="https://arxiv.org/abs/2401.00531">arXiv</a> · <a href="contractibility-of-the-orbit-space-of-a-saturated-fusion-system-after-Steinberg.pdf">pdf</a></div>
       </div>
     </div>
-  </section>
+  </details>
 
-  <section>
-    <h2>Talks</h2>
-    <div>
-      <div class="entry"><a href="Higher-Segal-Conditions-RFGRS.pdf">Higher Segal Conditions and Localities of Symmetric and Alternating Groups at the Prime 2</a>
-        <div class="meta">Representations of Finite Groups and Related Structures, UC Santa Cruz · Aug 2026</div></div>
-      <div class="entry"><a href="CT26_Omar_Dennaoui.pdf">A Nerve Theorem for Cyclic Multicategories</a>
-        <div class="meta">International Category Theory Conference (CT26), Johns Hopkins · Jul 2026</div></div>
-      <div class="entry"><a href="Higher-Segal-Conditions-SRAC26.pdf">Higher Segal Conditions and Localities of Symmetric and Alternating Groups at the Prime 2</a>
-        <div class="meta">Southern Regional Algebra Conference, Southeastern Louisiana · Mar 2026</div></div>
-      <details>
-        <summary>Earlier talks on the orbit space of a fusion system (4)</summary>
-        <div class="entry" style="margin-top:12px"><a href="Contractibility_SRAC25.pdf">SRAC &amp; Lloyd Roeling Conference, UL Lafayette</a> <span class="meta">· Apr 2025</span></div>
-        <div class="entry"><a href="Contractibility.pdf">South Central Topology Conference IV, Texas A&amp;M</a> <span class="meta">· Mar 2025</span></div>
-        <div class="entry"><a href="DV-con.pdf">Zassenhaus Groups and Friends, Texas State</a> <span class="meta">· Oct 2023</span></div>
-        <div class="entry"><a href="SCTCIII_beamer_SLIDES.pdf">South Central Topology Conference III, New Mexico State</a> <span class="meta">· [date]</span></div>
+  <!-- ===== Talks ===== -->
+  <details class="sec" id="talks">
+    <summary><h2>Talks<span class="count">7</span></h2><span class="plus">+</span></summary>
+    <div class="body">
+      <div class="year">2026</div>
+      <div class="entry"><a href="Higher-Segal-Conditions-RFGRS.pdf">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2</a>
+        <div class="meta">Representations of Finite Groups and Related Structures, UC Santa Cruz · August 2026</div></div>
+      <div class="entry"><a href="CT26_Omar_Dennaoui.pdf">A nerve theorem for cyclic multicategories</a>
+        <div class="meta">International Category Theory Conference (CT26), Johns Hopkins University · July 2026</div></div>
+      <div class="entry"><a href="Higher-Segal-Conditions-SRAC26.pdf">Higher Segal conditions and localities of symmetric and alternating groups at the prime 2</a>
+        <div class="meta">Southern Regional Algebra Conference, Southeastern Louisiana University · March 2026</div></div>
+
+      <div class="year">2025</div>
+      <div class="entry"><a href="Contractibility_SRAC25.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
+        <div class="meta">Southern Regional Algebra Conference &amp; Lloyd Roeling UL Lafayette Mathematics Conference · April 2025</div></div>
+      <div class="entry"><a href="Contractibility.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
+        <div class="meta">South Central Topology Conference IV, Texas A&amp;M University · March 2025</div></div>
+
+      <details class="older">
+        <summary>Older talks (2023–2024)</summary>
+        <div class="entry"><a href="DV-con.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
+          <div class="meta">Zassenhaus Groups and Friends Conference, Texas State University · June 2024</div></div>
+        <div class="entry"><a href="SCTCIII_beamer_SLIDES.pdf">Contractibility of the orbit space of a saturated fusion system after Steinberg</a>
+          <div class="meta">South Central Topology Conference III, New Mexico State University · October 2023</div></div>
       </details>
     </div>
-  </section>
+  </details>
 
-  <section>
-    <h2>Teaching</h2>
-    <div>
+  <!-- ===== Teaching ===== -->
+  <details class="sec" id="teaching">
+    <summary><h2>Teaching</h2><span class="plus">+</span></summary>
+    <div class="body">
+      <p class="meta" style="margin-top:0">At the University of Louisiana at Lafayette:</p>
       <div class="entry">Math 109/109S · Pre-Calculus Algebra <span class="meta">· Spring 2024</span></div>
       <div class="entry">Math 105/105S · Applied College Algebra Fundamentals <span class="meta">· Fall 2023, Fall 2024</span></div>
       <div class="entry">Math 105 · Applied College Algebra <span class="meta">· Spring 2023</span></div>
       <div class="entry">Math 103/104 · Applied College Algebra Fundamentals <span class="meta">· Fall 2022</span></div>
     </div>
-  </section>
+  </details>
 
-  <section>
-    <h2>Education</h2>
-    <div>
-      <div class="entry"><b>Ph.D. Mathematics</b>, University of Louisiana at Lafayette <span class="meta">· 2021–present</span></div>
+  <!-- ===== Education ===== -->
+  <details class="sec" id="education">
+    <summary><h2>Education</h2><span class="plus">+</span></summary>
+    <div class="body">
+      <div class="entry"><b>Ph.D. Mathematics</b>, University of Louisiana at Lafayette <span class="meta">· 2021–present</span>
+        <div class="meta">Advised by Justin Lynd and Philip Hackney</div></div>
       <div class="entry"><b>B.S. Mathematics with honors</b>, University of Balamand, Lebanon <span class="meta">· 2017–2020</span></div>
     </div>
-  </section>
+  </details>
 
-  <footer>Omar Dennaoui · Department of Mathematics, University of Louisiana at Lafayette, Lafayette, LA 70504</footer>
+  <footer>Omar Dennaoui · Department of Mathematics, University of Louisiana at Lafayette</footer>
 </div>
+
+<!-- PREVIEW ONLY: palette picker. Delete this div and its script, and keep whichever data-palette you like on <html>. -->
+<div class="picker" role="group" aria-label="Color palette">
+  <span>palette</span>
+  <button data-p="ink"     style="background:#1f3a68" title="Ink & ochre"></button>
+  <button data-p="oxblood" style="background:#7a1f2b" title="Oxblood & gold"></button>
+  <button data-p="slate"   style="background:#334e5c" title="Slate & coral"></button>
+  <button data-p="plum"    style="background:#5b2a6e" title="Plum & amber"></button>
+  <button data-p="cedar"   style="background:#2f6b45" title="Cedar & ochre"></button>
+</div>
+
+<script>
+  // Jump links open the matching section, then scroll to it.
+  document.querySelectorAll('.jump a').forEach(a => {
+    a.addEventListener('click', e => {
+      const d = document.querySelector(a.getAttribute('href'));
+      if (d) { e.preventDefault(); d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+  // Open a section directly if the URL has a #hash (e.g. .../#talks).
+  if (location.hash) { const d = document.querySelector(location.hash); if (d && d.tagName === 'DETAILS') d.open = true; }
+
+  // PREVIEW ONLY: palette picker
+  const root = document.documentElement, btns = document.querySelectorAll('.picker button');
+  function setP(p) { root.dataset.palette = p; btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.p === p)); try { localStorage.setItem('palette', p); } catch (e) {} }
+  btns.forEach(b => b.addEventListener('click', () => setP(b.dataset.p)));
+  let saved = null; try { saved = localStorage.getItem('palette'); } catch (e) {}
+  setP(saved || root.dataset.palette);
+</script>
 </body>
 </html>
