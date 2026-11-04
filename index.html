@@ -86,6 +86,9 @@
 
   .entry { margin-bottom:18px; }
   .entry .meta { color:var(--muted); font-size:.95rem; }
+  /* Secondary links (venues, coauthors): grey text with an ochre underline, green on hover */
+  .meta a { color:inherit; text-decoration-color:var(--accent-2); text-decoration-thickness:1.5px; transition:color .15s; }
+  .meta a:hover { color:var(--accent); }
   .entry .links { font-family:"IBM Plex Mono", monospace; font-size:12.5px; }
   .year { font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.1em; color:var(--muted); margin:22px 0 10px; }
   .year:first-child { margin-top:0; }
